@@ -37,3 +37,7 @@ export function verificationStartMarkup(event) {
   }
   fetchCountries(event.target.value.trim());
 }
+
+export function errorNotFound() {
+    Notify.failure('Oops, there is no country with that name');
+}

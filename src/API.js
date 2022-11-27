@@ -1,4 +1,4 @@
-import { verificationError, renderingMarkup } from './service-function';
+import { verificationError, renderingMarkup, errorNotFound } from './service-function';
 
 const API_URL = `https://restcountries.com/v2/name/`;
 
@@ -12,5 +12,5 @@ export function fetchCountries(country) {
     .then(data => {
       return renderingMarkup(data);
     })
-    .catch(error => console.error(error));
+    .catch(error => errorNotFound());
 }
