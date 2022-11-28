@@ -12,10 +12,10 @@ export function verificationError(response) {
 
 export function renderingMarkup(data) {
   if (data.length > 10) {
+    cleanHTML();
     Notify.info('Too many matches found. Please enter a more specific name');
   } else if (data.length > 2) {
-    infoCountryEl.innerHTML = ``;
-    nameCountryEl.innerHTML = ``;
+    cleanHTML();
     data.map(obj => {
       nameCountryEl.insertAdjacentHTML(
         'beforeend',
@@ -23,8 +23,7 @@ export function renderingMarkup(data) {
       );
     });
   } else if (data.length < 2) {
-    infoCountryEl.innerHTML = ``;
-    nameCountryEl.innerHTML = ``;
+    cleanHTML();
     data.map((obj) => {
       nameCountryEl.insertAdjacentHTML(
         'beforeend',
@@ -35,7 +34,7 @@ export function renderingMarkup(data) {
         `<ul>
       <li><span>Capital:</span> ${obj.capital}</li>
       <li><span>Population:</span> ${obj.population}</li>
-      <li><span>Languages:</span> ${Object.values(obj.languages)}</li>
+      <li><span>Languages:</span>${Object.values(obj.languages)}</li>
     </ul>`
         
       );
@@ -45,8 +44,7 @@ export function renderingMarkup(data) {
 
 export function verificationStartMarkup(event) {
   if (!event.target.value) {
-    nameCountryEl.innerHTML = ``;
-    infoCountryEl.innerHTML = ``;
+    cleanHTML();
     return Notify.warning('Enter country name');
   }
   fetchCountries(event.target.value.trim());
@@ -54,4 +52,9 @@ export function verificationStartMarkup(event) {
 
 export function errorNotFound() {
   Notify.failure('Oops, there is no country with that name');
+  }
+
+function cleanHTML() {
+     infoCountryEl.innerHTML = ``;
+     nameCountryEl.innerHTML = ``;
   }
