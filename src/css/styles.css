@@ -17,16 +17,11 @@ body {
   padding: 8px;
   max-width: 320px;
   margin-bottom: 16px;
-
-  
 }
 
-li {
-  
-  list-style: none;
-}
 
-ul{
+
+ul {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -34,14 +29,19 @@ ul{
 
 .country-list {
   display: flex;
-  flex-direction: row;
   gap: 10px;
 
   font-size: 20px;
   font-weight: bold;
 }
 
-span{
+span {
   font-weight: bold;
 }
 
+li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
