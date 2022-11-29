@@ -1,6 +1,6 @@
 import '../css/styles.css'
 import debounce from 'lodash.debounce';
-import { verificationStartMarkup } from './service-function';
+import { verificationStartMarkup, verificationEmptyString } from './service-function';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -12,4 +12,5 @@ inputEl.addEventListener('input', debounce(onSearchForm, DEBOUNCE_DELAY));
 
 function onSearchForm(event) {
   verificationStartMarkup(event)
+  verificationEmptyString(event)
 }

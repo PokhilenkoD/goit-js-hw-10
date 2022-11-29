@@ -1,7 +1,8 @@
 import '../css/styles.css';
-import { nameCountryEl, infoCountryEl } from './index';
+import { nameCountryEl, infoCountryEl} from './index';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { fetchCountries } from './API';
+import {fetchCountries} from './API'
+
 
 export function verificationError(response) {
   if (!response.ok) {
@@ -14,7 +15,7 @@ export function renderingMarkup(data) {
   if (data.length > 10) {
     cleanHTML();
     Notify.info('Too many matches found. Please enter a more specific name');
-  } else if (data.length > 2) {
+  } else if (data.length >= 2) {
     cleanHTML();
     data.map(obj => {
       nameCountryEl.insertAdjacentHTML(
@@ -24,7 +25,7 @@ export function renderingMarkup(data) {
     });
   } else if (data.length < 2) {
     cleanHTML();
-    data.map((obj) => {
+    data.map(obj => {
       nameCountryEl.insertAdjacentHTML(
         'beforeend',
         `<li><img src="${obj.flags.png}" alt="" height="15px" width="20px"/><span>${obj.name.official}</span></li>`
@@ -36,10 +37,9 @@ export function renderingMarkup(data) {
       <li><span>Population:</span> ${obj.population}</li>
       <li><span>Languages:</span>${Object.values(obj.languages)}</li>
     </ul>`
-        
       );
-    })
-  }
+    });
+  } 
 }
 
 export function verificationStartMarkup(event) {
@@ -47,14 +47,20 @@ export function verificationStartMarkup(event) {
     cleanHTML();
     return Notify.warning('Enter country name');
   }
-  fetchCountries(event.target.value.trim());
 }
 
 export function errorNotFound() {
+  cleanHTML();
   Notify.failure('Oops, there is no country with that name');
-  }
+}
 
 function cleanHTML() {
-     infoCountryEl.innerHTML = ``;
-     nameCountryEl.innerHTML = ``;
+  infoCountryEl.innerHTML = ``;
+  nameCountryEl.innerHTML = ``;
+}
+
+export function verificationEmptyString(event) {
+  if (event.target.value != '' && event.target.value != ' ') {
+    fetchCountries(event.target.value.trim());
   }
+}
