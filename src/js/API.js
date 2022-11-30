@@ -5,11 +5,14 @@ import {
   errorNotFound,
 } from './service-function';
 
+const searchParams = new URLSearchParams({
+  fields: 'name,capital,population,flags,languages',
+});
 const API_URL = `https://restcountries.com/v3.1/name/`;
 
 export function fetchCountries(country) {
   return fetch(
-    `${API_URL}${country}?fields=name,capital,population,flags,languages`
+    `${API_URL}${country}?${searchParams}`
   )
     .then(response => {
       return verificationError(response);
