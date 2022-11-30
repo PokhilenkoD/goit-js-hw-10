@@ -60,7 +60,7 @@ function cleanHTML() {
 }
 
 export function verificationEmptyString(event) {
-  if (event.target.value != '' && event.target.value != ' ') {
+  if (event.target.value.trim() != '') {
     fetchCountries(event.target.value.trim());
   }
 }
